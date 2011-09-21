@@ -17,25 +17,25 @@
 </ul>
 
 <h2>Generate form</h2>
-<cfif isDefined("URL.typeOfColdDoc") and isDefined("URL.strategyOfColdDoc")>
+<cfif isDefined("params.typeOfColdDoc") and isDefined("params.strategyOfColdDoc")>
 	<cfoutput>
 	<cfsavecontent variable="href">
-	/#URL.strategyOfColdDoc#/<cfif URL.strategyOfColdDoc EQ 'html'>index.html<cfelse>colddoc.uml</cfif>
+	/#params.strategyOfColdDoc#/<cfif params.strategyOfColdDoc EQ 'html'>index.html<cfelse>colddoc.uml</cfif>
 	</cfsavecontent>
-	
-    <p><tt>#generateColdDoc(URL.typeOfColdDoc, URL.strategyOfColdDoc)#</tt></p>
-    
-    <p><a href="#href#">Documentation #URL.strategyOfColdDoc# Generated</a></p>
+
+    <p><tt>#generateColdDoc(params.typeOfColdDoc, params.strategyOfColdDoc)#</tt></p>
+
+    <p><a href="#href#">Documentation #params.strategyOfColdDoc# Generated</a></p>
     </cfoutput>
 <cfelse>
 
 	<p><tt>Example: If your table is named "users", insert "user" in the form field below.</tt></p>
-    
+
 </cfif>
 
 <!--- Form --->
 <cfform action="#CGI.script_name & '?' & CGI.query_string#">
-	
+
 	<p><label for="typeOfColdDoc">Type</label> <br>
 	<cfselect name="typeOfColdDoc">
 		<option value="everything" selected="selected">Model and Controller</option>
@@ -43,16 +43,16 @@
 		<option value="model">Model</option>
 	</cfselect>
 	</p>
-	
+
 	<p><label for="strategyOfColdDoc">Strategy</label> <br>
 	<cfselect name="strategyOfColdDoc">
 		<option value="html" selected="selected">HTML</option>
 		<option value="uml">UML</option>
 	</cfselect>
 	</p>
-	
+
 	<p><cfinput type="submit" name="btnSubmit" value="Generate"></p>
-	
+
 </cfform>
 
 <a href="<cfoutput>#cgi.http_referer#</cfoutput>"><<< Go Back</a>
